@@ -9,9 +9,9 @@ package go;
  *
  * @author NguyenQuoc
  */
-class NoPierreExist extends Exception {
+class ExceptionNoPierreExist extends Exception {
 
-    public NoPierreExist()
+    public ExceptionNoPierreExist()
     {
     }
     

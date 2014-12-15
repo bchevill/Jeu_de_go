@@ -34,7 +34,7 @@ public class PlateauDeJeu {
         this.ko = ko;
     }
     
-    public Pierre getPierre(Point2D pierrePos) throws NoPierreExist
+    public Pierre getPierre(Point2D pierrePos) throws ExceptionNoPierreExist
     {
         for (Pierre pierre : plateau)
         {
@@ -43,13 +43,13 @@ public class PlateauDeJeu {
                 return pierre;
             }
         }
-        throw new NoPierreExist();
+        throw new ExceptionNoPierreExist();
     }
 
     /* Méthodes de classes */
     
     /**
-     * 
+     * Dit si la pierre que l'on veut ajouter est dans une situation de ko
      * @param pierrePos Position de la pierre que l'on veut tester
      * @return true si on est en situation de ko, false sinon
      */
@@ -63,7 +63,7 @@ public class PlateauDeJeu {
     }
 
     /**
-     * 
+     * Dit si la case indiqué est vide ou non
      * @param pierrePos Position de la pierre que l'on veut tester
      * @return  true si l'emplacement est libre, false sinon
      */
@@ -80,7 +80,7 @@ public class PlateauDeJeu {
     }
 
     /**
-     *
+     * Ajoute la pierre sur le plateau
      * @param pierre Pierre que l'on veut ajouter
      * @return 0 si aucun probleme, 1 si problème de ko et 2 si l'emplacement
      * est déjà pris
@@ -107,7 +107,7 @@ public class PlateauDeJeu {
     }
     
     /**
-     * 
+     * Indique si la pierre est bien sur le plateau et la supprime la pierre du plateau
      * @param pierreSup Pierre à supprimer
      * @return 1 si la pierre à bien été supprimé, 0 si la pierre n'a été trouvé
      */

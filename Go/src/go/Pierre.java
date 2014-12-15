@@ -87,28 +87,28 @@ public class Pierre {
             if (!(plateau.estVide(new Point2D.Double(pos.getX()-1,pos.getY())))
                     &&(this.couleur.equals(plateau.getPierre(new Point2D.Double(pos.getX()-1,pos.getY())).getCouleur()))){
                     ret.add(plateau.getPierre(new Point2D.Double(pos.getX()-1,pos.getY())));}
-        } catch (NoPierreExist ex) {
+        } catch (ExceptionNoPierreExist ex) {
             Logger.getLogger(Pierre.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
             if (!(plateau.estVide(new Point2D.Double(pos.getX(),pos.getY()+1)))
                     &&(this.couleur.equals(plateau.getPierre(new Point2D.Double(pos.getX(),pos.getY()+1)).getCouleur()))){
                      ret.add(plateau.getPierre(new Point2D.Double(pos.getX(),pos.getY()+1)));}
-        } catch (NoPierreExist ex) {
+        } catch (ExceptionNoPierreExist ex) {
             Logger.getLogger(Pierre.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
             if (!(plateau.estVide(new Point2D.Double(pos.getX()+1,pos.getY())))
                     &&(this.couleur.equals(plateau.getPierre(new Point2D.Double(pos.getX()+1,pos.getY())).getCouleur()))){
                      ret.add(plateau.getPierre(new Point2D.Double(pos.getX()+1,pos.getY())));}
-        } catch (NoPierreExist ex) {
+        } catch (ExceptionNoPierreExist ex) {
             Logger.getLogger(Pierre.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
             if (!(plateau.estVide(new Point2D.Double(pos.getX(),pos.getY()-1)))
                 &&(this.couleur==plateau.getPierre(new Point2D.Double(pos.getX(),pos.getY()-1)).getCouleur())){
                      ret.add(plateau.getPierre(new Point2D.Double(pos.getX(),pos.getY()-1)));}
-        } catch (NoPierreExist ex) {
+        } catch (ExceptionNoPierreExist ex) {
             Logger.getLogger(Pierre.class.getName()).log(Level.SEVERE, null, ex);
         }
        return ret; 
@@ -125,28 +125,28 @@ public class Pierre {
             if (!(plateau.estVide(new Point2D.Double(pos.getX()-1,pos.getY())))
                     &&(this.couleur!=plateau.getPierre(new Point2D.Double(pos.getX()-1,pos.getY())).getCouleur())){
                     ret.add(plateau.getPierre(new Point2D.Double(pos.getX()-1,pos.getY())));}
-        } catch (NoPierreExist ex) {
+        } catch (ExceptionNoPierreExist ex) {
             Logger.getLogger(Pierre.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
             if (!(plateau.estVide(new Point2D.Double(pos.getX(),pos.getY()+1)))
                     &&(this.couleur!=plateau.getPierre(new Point2D.Double(pos.getX(),pos.getY()+1)).getCouleur())){
                      ret.add(plateau.getPierre(new Point2D.Double(pos.getX(),pos.getY()+1)));}
-        } catch (NoPierreExist ex) {
+        } catch (ExceptionNoPierreExist ex) {
             Logger.getLogger(Pierre.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
             if (!(plateau.estVide(new Point2D.Double(pos.getX()+1,pos.getY())))
                     &&(this.couleur!=plateau.getPierre(new Point2D.Double(pos.getX()+1,pos.getY())).getCouleur())){
                      ret.add(plateau.getPierre(new Point2D.Double(pos.getX()+1,pos.getY())));}
-        } catch (NoPierreExist ex) {
+        } catch (ExceptionNoPierreExist ex) {
             Logger.getLogger(Pierre.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
             if (!(plateau.estVide(new Point2D.Double(pos.getX(),pos.getY()-1)))
                 &&(this.couleur!=plateau.getPierre(new Point2D.Double(pos.getX(),pos.getY()-1)).getCouleur())){
                      ret.add(plateau.getPierre(new Point2D.Double(pos.getX(),pos.getY()-1)));}
-        } catch (NoPierreExist ex) {
+        } catch (ExceptionNoPierreExist ex) {
             Logger.getLogger(Pierre.class.getName()).log(Level.SEVERE, null, ex);
         }
        return ret; 
