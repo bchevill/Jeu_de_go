@@ -29,7 +29,7 @@ public class plateauDeJeu {
     }
 
     /* Getters et Setters */
-    public setKo(Point2D ko)
+    public void setKo(Point2D ko)
     {
         this.ko = ko;
     }
