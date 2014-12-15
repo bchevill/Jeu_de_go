@@ -1,6 +1,7 @@
 package go;
 
 import java.awt.geom.Point2D;
+import java.util.ArrayList;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -36,7 +37,7 @@ public class PlateauDeJeu {
     
     public Pierre getPierre(Point2D pierrePos) throws ExceptionNoPierreExist
     {
-        for (Pierre pierre : plateau)
+        for(Pierre pierre : plateau)
         {
             if (pierre.getPosition().equals(pierrePos))
             {
@@ -55,7 +56,7 @@ public class PlateauDeJeu {
      */
     private boolean ko(Point2D pierrePos)
     {
-        if (pierrePos.equals(ko))
+        if(pierrePos.equals(ko))
         {
             return true;
         }
@@ -69,7 +70,7 @@ public class PlateauDeJeu {
      */
     public boolean estVide(Point2D pierrePos)
     {
-        for (Pierre pierre : plateau)
+        for(Pierre pierre : plateau)
         {
             if (pierre.getPosition().equals(pierrePos))
             {
@@ -113,9 +114,6 @@ public class PlateauDeJeu {
      */
     public boolean supprimerPierre(Pierre pierreSup)
     {
-        for (Pierre pierre : plateau)
-        {
-            return plateau.remove(pierre);
-        }
+        return plateau.remove(pierreSup);
     }
 }
