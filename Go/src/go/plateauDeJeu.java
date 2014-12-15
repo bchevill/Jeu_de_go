@@ -63,8 +63,8 @@ public class plateauDeJeu {
             {
                 return false;
             }
-            return true;
         }
+        return true;
     }
 
     /**
