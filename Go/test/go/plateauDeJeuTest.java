@@ -49,16 +49,16 @@ public class plateauDeJeuTest {
     @Test
     public void testEstVideTrue()
     {
-        Point2D pierrePos=null;
-        Pierre pierre1=null;
+        Point2D pierrePos=new Point2D.Double(1,1);
+        Pierre pierre1=new Pierre("jaune", new Point2D.Double(1,1));
         PlateauDeJeu plat = new PlateauDeJeu(19);
         
-        pierre1.setPosition(1,1);
-        pierrePos.setLocation(1,1);
+       // pierre1.setPosition(1,1);
+        //pierrePos.setLocation(1,1);
         
         plat.ajouterPierre(pierre1);
         
-        assertEquals(false,plat.estVide(pierrePos1));
+        assertEquals(false,plat.estVide(pierrePos));
                 
     }
     
@@ -68,16 +68,16 @@ public class plateauDeJeuTest {
     @Test
     public void testEstVideFalse()
     {
-        Point2D pierrePos=null;
-        Pierre pierre1=null;
+        Point2D pierrePos=new Point2D.Double(2,1);
+        Pierre pierre1=new Pierre("rouge", new Point2D.Double(0,0));
         PlateauDeJeu plat = new PlateauDeJeu(19);
-        
-        pierre1.setPosition(1,1);
-        pierrePos.setLocation(2,1);
+     
+        //pierre1.setPosition(1,1);
+        //pierrePos.setLocation(2,1);
         
         plat.ajouterPierre(pierre1);
         
-        assertEquals(true,plat.estVide(pierrePos1));
+        assertEquals(true,plat.estVide(pierrePos));
                 
     }
 
