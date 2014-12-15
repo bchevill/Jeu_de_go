@@ -33,6 +33,18 @@ public class PlateauDeJeu {
     {
         this.ko = ko;
     }
+    
+    public Pierre getPierre(Point2D pierrePos) throws NoPierreExist
+    {
+        for (Pierre pierre : plateau)
+        {
+            if (pierre.getPosition().equals(pierrePos))
+            {
+                return pierre;
+            }
+        }
+        throw new NoPierreExist();
+    }
 
     /* Méthodes de classes */
     
