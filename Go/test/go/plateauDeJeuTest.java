@@ -88,13 +88,13 @@ public class plateauDeJeuTest {
     public void testAjouterPierre()
     {
         System.out.println("ajouterPierre");
-        Pierre pierre = null;
-        PlateauDeJeu instance = null;
-        int expResult = 0;
+        Pierre pierre = new Pierre ("noir", new Point2D.Double(1,1));
+        Pierre pierre1 = new Pierre ("noir", new Point2D.Double(1,1));
+        PlateauDeJeu instance = new PlateauDeJeu(10);
+        int expResult = 2;
+        instance.ajouterPierre(pierre1);
         int result = instance.ajouterPierre(pierre);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -104,13 +104,12 @@ public class plateauDeJeuTest {
     public void testSupprimerPierre()
     {
         System.out.println("supprimerPierre");
-        Pierre pierreSup = null;
-        PlateauDeJeu instance = null;
-        boolean expResult = false;
+        Pierre pierreSup = new Pierre("noir", new Point2D.Double(1,1));
+        PlateauDeJeu instance = new PlateauDeJeu(10);
+        instance.ajouterPierre(pierreSup);
+        boolean expResult = true;
         boolean result = instance.supprimerPierre(pierreSup);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
 }
