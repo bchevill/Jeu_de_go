@@ -51,6 +51,10 @@ public class PlateauDeJeu {
     public int getTaille(){
         return taille;
     }
+    
+    public ArrayList<Pierre> getPierres(){
+        return plateau;
+    }
 
     /* Méthodes de classes */
     
