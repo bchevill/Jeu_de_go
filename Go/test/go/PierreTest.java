@@ -50,12 +50,6 @@ public class PierreTest {
     @Test
     public void testSetCouleur()
     {
-        System.out.println("setCouleur");
-        String couleur = "";
-        Pierre instance = null;
-        instance.setCouleur(couleur);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -74,9 +68,9 @@ public class PierreTest {
         assertEquals(1,pierre1.nbLibertes(plateau));
     }
     
-        /**
-     * Test of nbLibertes method, of class Pierre. Sur un bord
-     */
+    /**
+    * Test of nbLibertes method, of class Pierre. Sur un bord
+    */
     @Test
     public void testNbLibertesBord()
     {
@@ -97,12 +91,13 @@ public class PierreTest {
     public void testNbLibertesGeneral()
     {
         PlateauDeJeu plateau = new PlateauDeJeu(19);
-        Pierre pierre1 = new Pierre("Rouge", new Point2D.Float(5,6));
-        Pierre pierre2 = new Pierre("Jaune", new Point2D.Float(4,5));
+        Pierre pierre1 = new Pierre("Rouge", new Point2D.Float(0,6));
+        Pierre pierre2 = new Pierre("Jaune", new Point2D.Float(0,5));
         
         plateau.ajouterPierre(pierre1);
+        plateau.ajouterPierre(pierre2);
         
-        assertEquals(4,pierre1.nbLibertes(plateau));
+        assertEquals(2,pierre1.nbLibertes(plateau));
     }
     
    
