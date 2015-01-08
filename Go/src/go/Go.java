@@ -20,16 +20,16 @@ public class Go {
     public static void main(String[] args)
     {
 
-        int taille = 0;
+        int taille = -1;
 
         // Réponse à la question "Voulez-vous passer votre tour"
         boolean reponsePasserTourJ1 = false, reponsePasserTourJ2 = false;
 
         // On demande à l'utilisateur la taille du plateau
-        while (taille > 0 && taille < 20)
+        while (taille != 9 && taille != 11 && taille != 19)
         {
             Scanner scanner = new Scanner(System.in);
-            System.out.println("Rentrer la taille du plateau de jeu : (En entier) :");
+            System.out.println("Rentrer la taille du plateau de jeu : (9, 11 ou 19) :");
             taille = scanner.nextInt();
         }
 
@@ -46,17 +46,11 @@ public class Go {
         joueurActif = joueur1;
 
         //On vérifie les conditions de fin : Plus d'espace pour jouer ou les 2 joueurs passe leurs tours respectifs
-        while (plateau.resteDegreeLiberte() == false || (reponsePasserTourJ1 == true && reponsePasserTourJ2 == true))
+        while (plateau.resteDegreeLiberte() == false && !(reponsePasserTourJ1 == true && reponsePasserTourJ2 == true))
         {
 
             //On indique quel joueur doit jouer
-            if (joueurActif.getCouleur().equals("Blanc"))
-            {
-                System.out.println("Début du tour de Joueur Blanc");
-            } else
-            {
-                System.out.println("Début du tour de Joueur Noir");
-            }
+            System.out.println("Début du tour de Joueur " + joueurActif.getCouleur());
 
             //int qui permet de vérfier que la pose de pierre s'est bien passé
             int okAjouterPierre = -1;
@@ -68,7 +62,7 @@ public class Go {
             {
 
                 //On demande à l'utilisateur de rentrer l'abcisse de la pierre qu'il veut poser ou s'il veut passer son tour
-                while (pierreX < -1 && pierreX > taille)
+                while (pierreX < -1 || pierreX > taille)
                 {
                     Scanner scannerPosX = new Scanner(System.in);
                     System.out.println("L'abscisse de la case où vous voulez poser votre pierre : (Entre 0 et " + Integer.toString(taille - 1) + " ou -1 pour passer son tour) :");
@@ -81,11 +75,11 @@ public class Go {
                     //On retient que le joueur passe son tour
                     if (joueurActif.getCouleur().equals("Blanc"))
                     {
-                        System.out.println("Le Joueur Blanc passe son tour");
+                        System.out.println("Le Joueur Blanc passe son tour \n");
                         reponsePasserTourJ1 = true;
                     } else
                     {
-                        System.out.println("Le Joueur Noir passe son tour");
+                        System.out.println("Le Joueur Noir passe son tour \n");
                         reponsePasserTourJ2 = true;
                     }
                 } else
@@ -94,7 +88,7 @@ public class Go {
                     //On demande à l'utilisateur de rentrer l'ordonnée de la pierre qu'il veut poser
                     int pierreY = -1;
 
-                    while (pierreY < 0 && pierreY > taille)
+                    while (pierreY < 0 || pierreY > taille)
                     {
                         Scanner scannerPosY = new Scanner(System.in);
                         System.out.println("L'ordonnée de la case où vous voulez poser votre pierre : (Entre 0 et " + Integer.toString(taille - 1) + " ou -1 pour passer son tour) :");
@@ -107,12 +101,16 @@ public class Go {
 
                     // On ajoute la pierre. Si ce n'est pas possible, on boucle
                     okAjouterPierre = plateau.ajouterPierre(pierre);
+                    
+                    System.out.println("La pierre est posé");
                 }
             }
 
             //On change de joueur
             joueurActif = joueurActif.getCouleur().equals("Blanc") ? joueur2 : joueur1;
         }
+        
+        System.out.println("Fin de la Partie");
 
     }
 
