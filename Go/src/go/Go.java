@@ -62,7 +62,7 @@ public class Go {
             {
 
                 //On demande à l'utilisateur de rentrer l'abcisse de la pierre qu'il veut poser ou s'il veut passer son tour
-                while (pierreX < -1 || pierreX > taille)
+                while (pierreX < -1 || pierreX > taille-1)
                 {
                     Scanner scannerPosX = new Scanner(System.in);
                     System.out.println("L'abscisse de la case où vous voulez poser votre pierre : (Entre 0 et " + Integer.toString(taille - 1) + " ou -1 pour passer son tour) :");
@@ -88,7 +88,7 @@ public class Go {
                     //On demande à l'utilisateur de rentrer l'ordonnée de la pierre qu'il veut poser
                     int pierreY = -1;
 
-                    while (pierreY < 0 || pierreY > taille)
+                    while (pierreY < 0 || pierreY > taille-1)
                     {
                         Scanner scannerPosY = new Scanner(System.in);
                         System.out.println("L'ordonnée de la case où vous voulez poser votre pierre : (Entre 0 et " + Integer.toString(taille - 1) + " ou -1 pour passer son tour) :");
@@ -102,12 +102,25 @@ public class Go {
                     // On ajoute la pierre. Si ce n'est pas possible, on boucle
                     okAjouterPierre = plateau.ajouterPierre(pierre);
                     
-                    System.out.println("La pierre est posé");
+                    switch (okAjouterPierre) {
+                        case 0 :
+                            System.out.println("La pierre est posée");
+                            break;
+                        case 1 :
+                            System.out.println("La pierre n'a pas pu etre posée : \n Il y a un problème de KO");
+                            break;
+                        case 2 :
+                            System.out.println("La pierre n'a pas pu etre posée : \n L'emplacement est déjà pris");
+                            break;
+                    }
+                    
                 }
             }
 
             //On change de joueur
             joueurActif = joueurActif.getCouleur().equals("Blanc") ? joueur2 : joueur1;
+            
+            System.out.println("Fin du tour \n");
         }
         
         System.out.println("Fin de la Partie");
