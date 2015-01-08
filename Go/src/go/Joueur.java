@@ -6,5 +6,24 @@ package go;
  */
 public class Joueur {
     private String couleur;
-    private 
+    
+    // Constructeur
+    
+    /**
+     * 
+     */
+    public Joueur(String couleur){
+        this.couleur=couleur;
+    }
+    
+    //Getters and Setters
+    
+    /**
+     * 
+     * @return couleur La couleur du joueur
+     */
+    public String getCouleur(){
+        return couleur;
+    }
+    
 }
