@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>GroupeDePierre.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Go&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">go</a> &gt; <span class="el_source">GroupeDePierre.java</span></div><h1>GroupeDePierre.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package go;
+
+import java.util.ArrayList;
+
+/**
+ *
+ * @author NguyenQuoc
+ */
+public class GroupeDePierre {
+    /* Variables de classe*/
+    
+    ArrayList&lt;Pierre&gt; pierres;
+    
+    /* Constructeurs */
+    
+<span class="nc" id="L21">    public GroupeDePierre(Pierre pierre){</span>
+<span class="nc" id="L22">        pierres.add(pierre);</span>
+        
+<span class="nc" id="L24">    }</span>
+    
+    /* Getters et Setters */
+    
+    
+    /* Méthodes de classe */
+    
+    /**
+     * Compte le nombre de liberté autour du groupe de pierre (afin de savoir s'il est capturé ou non)
+     * @param plateau Le plateau de jeu
+     * @return Le nombre de degré de liberté du groupe de pierre
+     */
+    private int nbLibertes(PlateauDeJeu plateau)
+    {
+<span class="nc" id="L38">        int somme=0;</span>
+<span class="nc bnc" id="L39" title="All 2 branches missed.">        for(Pierre pierre : pierres)</span>
+        {
+<span class="nc" id="L41">            somme+=pierre.nbLibertes(plateau);</span>
+<span class="nc" id="L42">        }</span>
+<span class="nc" id="L43">        return somme;</span>
+    }
+    
+    /**
+     * Capture le groupe de pierre (si possible)
+     * @param plateau 
+     */
+    public void capturer(PlateauDeJeu plateau)
+    {
+<span class="nc bnc" id="L52" title="All 2 branches missed.">        if(nbLibertes(plateau)==0)</span>
+        {
+<span class="nc bnc" id="L54" title="All 2 branches missed.">            for(Pierre pierre : pierres)</span>
+            {
+<span class="nc" id="L56">                plateau.supprimerPierre(pierre);</span>
+<span class="nc" id="L57">            }</span>
+        }
+<span class="nc" id="L59">    }</span>
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201409121644</span></div></body></html>

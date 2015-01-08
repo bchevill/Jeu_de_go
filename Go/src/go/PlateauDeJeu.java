@@ -27,6 +27,7 @@ public class PlateauDeJeu {
     public PlateauDeJeu(int taille)
     {
         this.taille = taille;
+        plateau = new ArrayList<Pierre>();
     }
 
     /* Getters et Setters */
@@ -45,6 +46,10 @@ public class PlateauDeJeu {
             }
         }
         throw new ExceptionNoPierreExist();
+    }
+    
+    public int getTaille(){
+        return taille;
     }
 
     /* Méthodes de classes */
@@ -70,11 +75,13 @@ public class PlateauDeJeu {
      */
     public boolean estVide(Point2D pierrePos)
     {
-        for(Pierre pierre : plateau)
-        {
-            if (pierre.getPosition().equals(pierrePos))
+        if(plateau!=null){
+            for(Pierre pierre : plateau)
             {
-                return false;
+                if (pierre.getPosition().equals(pierrePos))
+                {
+                    return false;
+                }
             }
         }
         return true;

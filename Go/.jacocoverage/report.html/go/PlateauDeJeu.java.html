@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>PlateauDeJeu.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Go&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">go</a> &gt; <span class="el_source">PlateauDeJeu.java</span></div><h1>PlateauDeJeu.java</h1><pre class="source lang-java linenums">package go;
+
+import java.awt.geom.Point2D;
+import java.util.ArrayList;
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+/**
+ *
+ * @author NguyenQuoc
+ */
+public class PlateauDeJeu {
+
+    /* Variables de classes */
+    ArrayList&lt;Pierre&gt; plateau;
+    int taille;
+    Point2D ko;
+
+    /* Constructeurs */
+    /**
+     *
+     * @param taille La taille du plateau
+     */
+    public PlateauDeJeu(int taille)
+<span class="nc" id="L28">    {</span>
+<span class="nc" id="L29">        this.taille = taille;</span>
+<span class="nc" id="L30">    }</span>
+
+    /* Getters et Setters */
+    public void setKo(Point2D ko)
+    {
+<span class="nc" id="L35">        this.ko = ko;</span>
+<span class="nc" id="L36">    }</span>
+    
+    public Pierre getPierre(Point2D pierrePos) throws ExceptionNoPierreExist
+    {
+<span class="nc bnc" id="L40" title="All 2 branches missed.">        for(Pierre pierre : plateau)</span>
+        {
+<span class="nc bnc" id="L42" title="All 2 branches missed.">            if (pierre.getPosition().equals(pierrePos))</span>
+            {
+<span class="nc" id="L44">                return pierre;</span>
+            }
+<span class="nc" id="L46">        }</span>
+<span class="nc" id="L47">        throw new ExceptionNoPierreExist();</span>
+    }
+
+    /* Méthodes de classes */
+    
+    /**
+     * Dit si la pierre que l'on veut ajouter est dans une situation de ko
+     * @param pierrePos Position de la pierre que l'on veut tester
+     * @return true si on est en situation de ko, false sinon
+     */
+    private boolean ko(Point2D pierrePos)
+    {
+<span class="nc bnc" id="L59" title="All 2 branches missed.">        if(pierrePos.equals(ko))</span>
+        {
+<span class="nc" id="L61">            return true;</span>
+        }
+<span class="nc" id="L63">        return false;</span>
+    }
+
+    /**
+     * Dit si la case indiqué est vide ou non
+     * @param pierrePos Position de la pierre que l'on veut tester
+     * @return  true si l'emplacement est libre, false sinon
+     */
+    public boolean estVide(Point2D pierrePos)
+    {
+<span class="nc bnc" id="L73" title="All 2 branches missed.">        for(Pierre pierre : plateau)</span>
+        {
+<span class="nc bnc" id="L75" title="All 2 branches missed.">            if (pierre.getPosition().equals(pierrePos))</span>
+            {
+<span class="nc" id="L77">                return false;</span>
+            }
+<span class="nc" id="L79">        }</span>
+<span class="nc" id="L80">        return true;</span>
+    }
+
+    /**
+     * Ajoute la pierre sur le plateau
+     * @param pierre Pierre que l'on veut ajouter
+     * @return 0 si aucun probleme, 1 si problème de ko et 2 si l'emplacement
+     * est déjà pris
+     */
+    public int ajouterPierre(Pierre pierre)
+    {
+
+        //Vérifie si la pierre ne remplit pas les conditions de ko
+<span class="nc bnc" id="L93" title="All 2 branches missed.">        if (!ko(pierre.getPosition()))</span>
+        {
+            // Vérifie si la position est libre
+<span class="nc bnc" id="L96" title="All 2 branches missed.">            if (estVide(pierre.getPosition()))</span>
+            {
+<span class="nc" id="L98">                plateau.add(pierre);</span>
+<span class="nc" id="L99">                return 0;</span>
+            } else
+            {
+<span class="nc" id="L102">                return 2;</span>
+            }
+        } else
+        {
+<span class="nc" id="L106">            return 1;</span>
+        }
+    }
+    
+    /**
+     * Indique si la pierre est bien sur le plateau et la supprime la pierre du plateau
+     * @param pierreSup Pierre à supprimer
+     * @return 1 si la pierre à bien été supprimé, 0 si la pierre n'a été trouvé
+     */
+    public boolean supprimerPierre(Pierre pierreSup)
+    {
+<span class="nc" id="L117">        return plateau.remove(pierreSup);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201409121644</span></div></body></html>

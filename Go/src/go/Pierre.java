@@ -52,13 +52,13 @@ public class Pierre {
         int ret=0;
         Point2D pos=this.getPosition();
         
-            if (plateau.estVide(new Point2D.Double(pos.getX()-1,pos.getY()))){
+            if (plateau.estVide(new Point2D.Double(pos.getX()-1,pos.getY())) && (pos.getX()-1)>=0){
                 ret++;}
-            if(plateau.estVide(new Point2D.Double(pos.getX(),pos.getY()+1))){
+            if(plateau.estVide(new Point2D.Double(pos.getX(),pos.getY()+1)) && (pos.getY()+1)<plateau.getTaille()){
                 ret++;}
-            if (plateau.estVide(new Point2D.Double(pos.getX()+1,pos.getY()))){
+            if (plateau.estVide(new Point2D.Double(pos.getX()+1,pos.getY())) && (pos.getX()+1)<plateau.getTaille()){
                 ret++;}
-            if(plateau.estVide(new Point2D.Double(pos.getX(),pos.getY()-1))){
+            if(plateau.estVide(new Point2D.Double(pos.getX(),pos.getY()-1)) && (pos.getY()-1)>=0){
                 ret++;}
         return ret;
     }
