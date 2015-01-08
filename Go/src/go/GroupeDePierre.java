@@ -6,6 +6,7 @@
 package go;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  *
@@ -13,49 +14,60 @@ import java.util.ArrayList;
  */
 public class GroupeDePierre {
     /* Variables de classe*/
-    
+
     ArrayList<Pierre> pierres;
-    
+
     /* Constructeurs */
-    
-    public GroupeDePierre(Pierre pierre){
+    public GroupeDePierre(Pierre pierre, PlateauDeJeu plateau) {
         pierres.add(pierre);
-        
+        Pierre traitee;
+        LinkedList<Pierre> aTraiter = new LinkedList<Pierre>();
+        for (Pierre pierrevoisine : pierre.amiesVoisines(plateau)) {
+            aTraiter.push(pierrevoisine);
+        }
+
+        while (!aTraiter.isEmpty()) {
+            traitee = aTraiter.pop();
+            pierres.add(traitee);
+            for (Pierre pierrevoisine : pierre.amiesVoisines(plateau)) {
+                if (!pierres.contains(pierrevoisine)) {
+                    aTraiter.push(pierrevoisine);
+                }
+            }
+        }
     }
-    
+
     /* Getters et Setters */
-    
-    
+    public ArrayList<Pierre> getPierres(){
+        return pierres;
+    }
     /* Méthodes de classe */
-    
     /**
-     * Compte le nombre de liberté autour du groupe de pierre (afin de savoir s'il est capturé ou non)
+     * Compte le nombre de liberté autour du groupe de pierre (afin de savoir
+     * s'il est capturé ou non)
+     *
      * @param plateau Le plateau de jeu
      * @return Le nombre de degré de liberté du groupe de pierre
      */
-    private int nbLibertes(PlateauDeJeu plateau)
-    {
-        int somme=0;
-        for(Pierre pierre : pierres)
-        {
-            somme+=pierre.nbLibertes(plateau);
+    private int nbLibertes(PlateauDeJeu plateau) {
+        int somme = 0;
+        for (Pierre pierre : pierres) {
+            somme += pierre.nbLibertes(plateau);
         }
         return somme;
     }
-    
+
     /**
-     * Capture le groupe de pierre (si possible)
-     * @param plateau 
+     * Capture le groupe de pierres (si possible)
+     *
+     * @param plateau
      */
-    public void capturer(PlateauDeJeu plateau)
-    {
-        if(nbLibertes(plateau)==0)
-        {
-            for(Pierre pierre : pierres)
-            {
+    public void capturer(PlateauDeJeu plateau) {
+        if (nbLibertes(plateau) == 0) {
+            for (Pierre pierre : pierres) {
                 plateau.supprimerPierre(pierre);
             }
         }
     }
-    
+
 }
