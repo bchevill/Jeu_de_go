@@ -51,10 +51,6 @@ public class PlateauDeJeu {
     public int getTaille(){
         return taille;
     }
-    
-    public ArrayList<Pierre> getPierres(){
-        return plateau;
-    }
 
     /* Méthodes de classes */
     
@@ -127,4 +123,22 @@ public class PlateauDeJeu {
     {
         return plateau.remove(pierreSup);
     }
+    
+    /**
+     * Fonction pour savoir si le tour se fini car il n'y a plus de degré de liberté
+     * @return result : Revoie 0 s'il n'y a plus de degrée de liberté restant sur tout le plateau (en prennant en compte toutes les pierres)
+     */
+    public boolean resteDegreeLiberte(){
+        int result=0;
+            if(plateau.isEmpty()){
+                return false;
+            }
+            else{
+                for(Pierre pierre : plateau){
+                    result+=pierre.nbLibertes(this);
+                }
+            }
+        return result==0;
+    }
+        
 }
