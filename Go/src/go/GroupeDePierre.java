@@ -18,6 +18,11 @@ public class GroupeDePierre {
     ArrayList<Pierre> pierres;
 
     /* Constructeurs */
+    /**
+     * Creer un groupe de pierres
+     * @param pierre la noouvelle pierre à ajouter au groupe de pierres
+     * @param plateau indique l'emplacement des pierres existantes pour reformer les groupes
+     */
     public GroupeDePierre(Pierre pierre, PlateauDeJeu plateau) {
         pierres.add(pierre);
         Pierre traitee;
@@ -38,6 +43,11 @@ public class GroupeDePierre {
     }
 
     /* Getters et Setters */
+    
+    /**
+     * Getter de pierre
+     * @return retourne la liste des pierres dans le groupe
+     */
     public ArrayList<Pierre> getPierres(){
         return pierres;
     }
