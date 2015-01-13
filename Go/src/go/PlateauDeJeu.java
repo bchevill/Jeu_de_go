@@ -95,7 +95,8 @@ public class PlateauDeJeu {
      */
     public int ajouterPierre(Pierre pierre)
     {
-
+        // TODO Appeler la "fonction groupe de pierres"
+        
         //Vérifie si la pierre ne remplit pas les conditions de ko
         if (!ko(pierre.getPosition()))
         {
