@@ -112,6 +112,9 @@ public class Go {
                         case 2 :
                             System.out.println("La pierre n'a pas pu etre posée : \n L'emplacement est déjà pris");
                             break;
+                        case 3 :
+                            System.out.println("La pierre n'a pas pu etre posée : \n C'est un sucide");
+                            break;
                     }
                     
                 }

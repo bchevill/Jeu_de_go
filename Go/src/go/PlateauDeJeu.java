@@ -48,6 +48,10 @@ public class PlateauDeJeu {
         throw new ExceptionNoPierreExist();
     }
     
+    public ArrayList<Pierre> getPierres(){
+        return plateau;
+    }
+    
     public int getTaille(){
         return taille;
     }
@@ -90,12 +94,15 @@ public class PlateauDeJeu {
     /**
      * Ajoute la pierre sur le plateau
      * @param pierre Pierre que l'on veut ajouter
-     * @return 0 si aucun probleme, 1 si problème de ko et 2 si l'emplacement
-     * est déjà pris
+     * @return 0 si aucun probleme, 1 si problème de ko, 2 si l'emplacement
+     * est déjà pris et 3 s'il y a suicide.
      */
     public int ajouterPierre(Pierre pierre)
     {
         // TODO Appeler la "fonction groupe de pierres"
+        GroupeDePierre groupe;
+        
+        int flag; // Message à renvoyer
         
         //Vérifie si la pierre ne remplit pas les conditions de ko
         if (!ko(pierre.getPosition()))
@@ -103,16 +110,26 @@ public class PlateauDeJeu {
             // Vérifie si la position est libre
             if (estVide(pierre.getPosition()))
             {
-                plateau.add(pierre);
-                return 0;
+                groupe = new GroupeDePierre(pierre, this);
+                if(groupe.nbLibertes(this)==0){
+                    flag=3; // C'est un suicide
+                }
+                else{
+                    plateau.add(pierre);
+
+                    //On verifie les captures
+                    groupe.captureSiBesoin(this); 
+                    flag=0;
+                }    
             } else
             {
-                return 2;
+                flag=2; // L'emplacement est déjà pris
             }
         } else
         {
-            return 1;
+            flag=1; // C'est un KO
         }
+        return flag;
     }
     
     /**

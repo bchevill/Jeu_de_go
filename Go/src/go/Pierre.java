@@ -151,4 +151,26 @@ public class Pierre {
         }
        return ret; 
     }
+
+    /**
+     * Cherche a savoir si les 2 pierres sont cote à cote (en forme de + : juste au dessous, en dessous, a droite ou a gauche)
+     * @param pierre2 La deuxieme pierre
+     * @return true si elles sont cote à cote, false sinon
+     */
+    boolean estACoteDe(Pierre pierre2)
+    {
+        boolean reponse;
+         if((pierre2.getPosition().getX()==position.getX()+1 && pierre2.getPosition().getY()==position.getY()) ||
+                (pierre2.getPosition().getX()==position.getX()-1 && pierre2.getPosition().getY()==position.getY()) ||
+                    (pierre2.getPosition().getX()==position.getX() && pierre2.getPosition().getY()==position.getY()-1) ||
+                        (pierre2.getPosition().getX()==position.getX() && pierre2.getPosition().getY()==position.getY()+1))
+         {
+             reponse=true;
+         }
+         else
+         {
+             reponse=false;
+         }
+        return reponse;          
+    }
 }

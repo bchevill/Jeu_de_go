@@ -20,7 +20,7 @@ public class GroupeDePierre {
     /* Constructeurs */
     /**
      * Creer un groupe de pierres
-     * @param pierre la noouvelle pierre à ajouter au groupe de pierres
+     * @param pierre la nouvelle pierre à ajouter au groupe de pierres
      * @param plateau indique l'emplacement des pierres existantes pour reformer les groupes
      */
     public GroupeDePierre(Pierre pierre, PlateauDeJeu plateau) {
@@ -51,6 +51,7 @@ public class GroupeDePierre {
     public ArrayList<Pierre> getPierres(){
         return pierres;
     }
+    
     /* Méthodes de classe */
     /**
      * Compte le nombre de liberté autour du groupe de pierre (afin de savoir
@@ -59,12 +60,35 @@ public class GroupeDePierre {
      * @param plateau Le plateau de jeu
      * @return Le nombre de degré de liberté du groupe de pierre
      */
-    private int nbLibertes(PlateauDeJeu plateau) {
+    public int nbLibertes(PlateauDeJeu plateau) {
         int somme = 0;
         for (Pierre pierre : pierres) {
             somme += pierre.nbLibertes(plateau);
         }
         return somme;
+    }
+    
+    /**
+     * Cherche a savoir s'il y a eu capture de pions et les retirent du plateau dans le cas échéant
+     * @param plateau Le plateau de Jeu
+     */
+    public void captureSiBesoin(PlateauDeJeu plateau){
+        //On récupère les pierres du plateau
+        ArrayList<Pierre> pierresDuPlateau;
+        pierresDuPlateau = plateau.getPierres();
+        
+        //On teste sur toutes les pierres du groupe
+        for (int i=0;i<pierres.size();i++){           
+            for(int j=0;j<pierresDuPlateau.size();j++){
+                //On prend les pierres qui sont à cotés du groupe et qui n'appartienne pas au groupe
+                if(pierresDuPlateau.get(j).estACoteDe(pierres.get(i)) && !pierres.contains(pierresDuPlateau.get(j))){
+                    //On calcule le groupe de ces pierres ci
+                    GroupeDePierre groupeATester = new GroupeDePierre(pierresDuPlateau.get(j),plateau);
+                    //Si elles sont capturés on les retire du plateau
+                    groupeATester.capturer(plateau);
+                }
+            }
+        }
     }
 
     /**
