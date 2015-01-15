@@ -24,6 +24,7 @@ public class GroupeDePierre {
      * @param plateau indique l'emplacement des pierres existantes pour reformer les groupes
      */
     public GroupeDePierre(Pierre pierre, PlateauDeJeu plateau) {
+        pierres = new ArrayList<Pierre>();
         pierres.add(pierre);
         Pierre traitee;
         LinkedList<Pierre> aTraiter = new LinkedList<Pierre>();
