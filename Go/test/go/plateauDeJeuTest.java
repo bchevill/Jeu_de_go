@@ -49,6 +49,7 @@ public class plateauDeJeuTest {
     @Test
     public void testEstVideTrue()
     {
+        Joueur joueur = new Joueur("Noir");
         Point2D pierrePos=new Point2D.Double(1,1);
         Pierre pierre1=new Pierre("jaune", new Point2D.Double(1,1));
         PlateauDeJeu plat = new PlateauDeJeu(19);
@@ -56,7 +57,7 @@ public class plateauDeJeuTest {
        // pierre1.setPosition(1,1);
         //pierrePos.setLocation(1,1);
         
-        plat.ajouterPierre(pierre1);
+        plat.ajouterPierre(pierre1,joueur);
         
         assertEquals(false,plat.estVide(pierrePos));
                 
@@ -68,6 +69,7 @@ public class plateauDeJeuTest {
     @Test
     public void testEstVideFalse()
     {
+        Joueur joueur = new Joueur("Noir");
         Point2D pierrePos=new Point2D.Double(2,1);
         Pierre pierre1=new Pierre("rouge", new Point2D.Double(0,0));
         PlateauDeJeu plat = new PlateauDeJeu(19);
@@ -75,7 +77,7 @@ public class plateauDeJeuTest {
         //pierre1.setPosition(1,1);
         //pierrePos.setLocation(2,1);
         
-        plat.ajouterPierre(pierre1);
+        plat.ajouterPierre(pierre1,joueur);
         
         assertEquals(true,plat.estVide(pierrePos));
                 
@@ -88,12 +90,13 @@ public class plateauDeJeuTest {
     public void testAjouterPierre()
     {
         System.out.println("ajouterPierre");
+        Joueur joueur = new Joueur("Noir");
         Pierre pierre = new Pierre ("noir", new Point2D.Double(1,1));
         Pierre pierre1 = new Pierre ("noir", new Point2D.Double(1,1));
         PlateauDeJeu instance = new PlateauDeJeu(10);
         int expResult = 2;
-        instance.ajouterPierre(pierre1);
-        int result = instance.ajouterPierre(pierre);
+        instance.ajouterPierre(pierre1,joueur);
+        int result = instance.ajouterPierre(pierre,joueur);
         assertEquals(expResult, result);
     }
 
@@ -103,10 +106,11 @@ public class plateauDeJeuTest {
     @Test
     public void testSupprimerPierre()
     {
+        Joueur joueur = new Joueur("Noir");
         System.out.println("supprimerPierre");
         Pierre pierreSup = new Pierre("noir", new Point2D.Double(1,1));
         PlateauDeJeu instance = new PlateauDeJeu(10);
-        instance.ajouterPierre(pierreSup);
+        instance.ajouterPierre(pierreSup,joueur);
         boolean expResult = true;
         boolean result = instance.supprimerPierre(pierreSup);
         assertEquals(expResult, result);
