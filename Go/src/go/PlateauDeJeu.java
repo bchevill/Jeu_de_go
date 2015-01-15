@@ -158,5 +158,44 @@ public class PlateauDeJeu {
             }
         return result==0;
     }
+    
+    @Override
+    public String toString(){
+        String resultPlateau="";
+        
+        boolean isPierrePosition;
+        String color="";
+        
+        for(int i=0;i<taille;i++){
+            for(int j=0;j<taille;j++){
+                isPierrePosition=false;
+                for(Pierre pierre : plateau){
+                    if(pierre.getPosition().getX()==j && pierre.getPosition().getY()==i){
+                        isPierrePosition=true;
+                        if(pierre.getCouleur()=="Noir"){
+                            color="Noir";
+                        }
+                        else{
+                            color="Blanc";
+                        }
+                    }
+                }
+                if(isPierrePosition){
+                    if(color=="Blanc"){
+                        resultPlateau+="O ";
+                    }
+                    else{
+                        resultPlateau+="0 ";
+                    }
+                }
+                else{
+                    resultPlateau+="- ";
+                }
+            }
+            resultPlateau+=" \n";
+        }
+        return resultPlateau;
+        
+    }
         
 }

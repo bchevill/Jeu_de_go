@@ -141,6 +141,9 @@ public class Go {
             joueurActif = joueurActif.getCouleur().equals("Blanc") ? joueur2 : joueur1;
             
             System.out.println("Fin du tour \n");
+            System.out.println(plateau.toString());
+            System.out.println("\n \n");
+            
         }
         
         System.out.println("Fin de la Partie");
