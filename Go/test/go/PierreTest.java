@@ -20,38 +20,6 @@ import static org.junit.Assert.*;
  */
 public class PierreTest {
     
-    public PierreTest()
-    {
-    }
-    
-    @BeforeClass
-    public static void setUpClass()
-    {
-    }
-    
-    @AfterClass
-    public static void tearDownClass()
-    {
-    }
-    
-    @Before
-    public void setUp()
-    {
-    }
-    
-    @After
-    public void tearDown()
-    {
-    }
-
-    /**
-     * Test of setCouleur method, of class Pierre.
-     */
-    @Test
-    public void testSetCouleur()
-    {
-    }
-
     /**
      * Test of nbLibertes method, of class Pierre. Dans un coin
      */
@@ -102,33 +70,5 @@ public class PierreTest {
         
         assertEquals(2,pierre1.nbLibertes(plateau));
     }
-    
-   
-    /**
-     * Test of verifSuicide method, of class Pierre.
-     */
-    @Test
-    public void testVerifSuicide()
-    {
 
-    }
-
-    /**
-     * Test of amiesVoisines method, of class Pierre.
-     */
-    @Test
-    public void testAmiesVoisines()
-    {
-
-    }
-
-    /**
-     * Test of ennemiesVoisines method, of class Pierre.
-     */
-    @Test
-    public void testEnnemiesVoisines()
-    {
-
-    }
-    
 }

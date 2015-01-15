@@ -82,24 +82,7 @@ public class plateauDeJeuTest {
         assertEquals(true,plat.estVide(pierrePos));
                 
     }
-
-    /**
-     * Test of ajouterPierre method, of class plateauDeJeu.
-     */
-    @Test
-    public void testAjouterPierre()
-    {
-        System.out.println("ajouterPierre");
-        Joueur joueur = new Joueur("Noir");
-        Pierre pierre = new Pierre ("noir", new Point2D.Double(1,1));
-        Pierre pierre1 = new Pierre ("noir", new Point2D.Double(1,1));
-        PlateauDeJeu instance = new PlateauDeJeu(10);
-        int expResult = 2;
-        instance.ajouterPierre(pierre1,joueur);
-        int result = instance.ajouterPierre(pierre,joueur);
-        assertEquals(expResult, result);
-    }
-
+    
     /**
      * Test of supprimerPierre method, of class plateauDeJeu.
      */
@@ -107,7 +90,6 @@ public class plateauDeJeuTest {
     public void testSupprimerPierre()
     {
         Joueur joueur = new Joueur("Noir");
-        System.out.println("supprimerPierre");
         Pierre pierreSup = new Pierre("noir", new Point2D.Double(1,1));
         PlateauDeJeu instance = new PlateauDeJeu(10);
         instance.ajouterPierre(pierreSup,joueur);
@@ -115,5 +97,138 @@ public class plateauDeJeuTest {
         boolean result = instance.supprimerPierre(pierreSup);
         assertEquals(expResult, result);
     }
+    
+     /**
+     * Test de la fonction ajouterPierre pour un emplacement déja pris
+     */
+    @Test
+    public void testDejaPrisjouterPierre()
+    {
+        PlateauDeJeu plateau = new PlateauDeJeu(11);
+        Joueur joueur = new Joueur("Noir");
+        Pierre pierre1 = new Pierre("Noir", new Point2D.Float(1,1));
+        Pierre pierre2 = new Pierre("Noir", new Point2D.Float(1,1));
+        
+        plateau.ajouterPierre(pierre1,joueur);
+        
+        assertEquals(2,plateau.ajouterPierre(pierre2,joueur));
+
+    }
+    
+     /**
+     * Test de la fonction ajouterPierre pour un emplacement libre sans aucun problème
+     */
+    @Test
+    public void testAucunProblemejouterPierre()
+    {
+        PlateauDeJeu plateau = new PlateauDeJeu(11);
+        Joueur joueur = new Joueur("Noir");
+        Pierre pierre1 = new Pierre("Noir", new Point2D.Float(1,1));
+        Pierre pierre2 = new Pierre("Noir", new Point2D.Float(1,2));
+        
+        plateau.ajouterPierre(pierre1,joueur);
+        
+        assertEquals(0,plateau.ajouterPierre(pierre2,joueur));
+
+    }
+    
+         /**
+     * Test de la fonction ajouterPierre pour une capture en suicide
+     */
+    @Test
+    public void testCaptureEnSuicideAjouterPierre()
+    {
+        PlateauDeJeu plateau = new PlateauDeJeu(11);
+        Joueur joueur1 = new Joueur("Noir");
+        Joueur joueur2 = new Joueur("Blanc");
+        Pierre pierre1 = new Pierre("Noir", new Point2D.Float(2,3));
+        Pierre pierre2 = new Pierre("Noir", new Point2D.Float(3,2));
+        Pierre pierre3 = new Pierre("Noir", new Point2D.Float(3,4));
+        Pierre pierre4 = new Pierre("Blanc", new Point2D.Float(3,3));
+        Pierre pierre5 = new Pierre("Blanc", new Point2D.Float(4,2));
+        Pierre pierre6 = new Pierre("Blanc", new Point2D.Float(4,4));
+        Pierre pierre7 = new Pierre("Blanc", new Point2D.Float(5,3));
+        Pierre pierre8 = new Pierre("Noir", new Point2D.Float(4,3));
+        
+        plateau.ajouterPierre(pierre1,joueur1);
+        plateau.ajouterPierre(pierre2,joueur1);
+        plateau.ajouterPierre(pierre3,joueur1);
+        plateau.ajouterPierre(pierre4,joueur2);
+        plateau.ajouterPierre(pierre5,joueur2);
+        plateau.ajouterPierre(pierre6,joueur2);
+        plateau.ajouterPierre(pierre7,joueur2);
+        
+        
+        assertEquals(0,plateau.ajouterPierre(pierre8,joueur1));
+
+    }
+    
+         /**
+     * Test de la fonction ajouterPierre pour une capture en suicide
+     */
+    @Test
+    public void testKOAjouterPierre()
+    {
+        PlateauDeJeu plateau = new PlateauDeJeu(11);
+        Joueur joueur1 = new Joueur("Noir");
+        Joueur joueur2 = new Joueur("Blanc");
+        Pierre pierre1 = new Pierre("Noir", new Point2D.Float(2,3));
+        Pierre pierre2 = new Pierre("Noir", new Point2D.Float(3,2));
+        Pierre pierre3 = new Pierre("Noir", new Point2D.Float(3,4));
+        Pierre pierre4 = new Pierre("Blanc", new Point2D.Float(3,3));
+        Pierre pierre5 = new Pierre("Blanc", new Point2D.Float(4,2));
+        Pierre pierre6 = new Pierre("Blanc", new Point2D.Float(4,4));
+        Pierre pierre7 = new Pierre("Blanc", new Point2D.Float(5,3));
+        Pierre pierre8 = new Pierre("Noir", new Point2D.Float(4,3));
+        Pierre pierre9 = new Pierre("Blanc", new Point2D.Float(3,3));
+        
+        plateau.ajouterPierre(pierre1,joueur1);
+        plateau.ajouterPierre(pierre2,joueur1);
+        plateau.ajouterPierre(pierre3,joueur1);
+        plateau.ajouterPierre(pierre4,joueur2);
+        plateau.ajouterPierre(pierre5,joueur2);
+        plateau.ajouterPierre(pierre6,joueur2);
+        plateau.ajouterPierre(pierre7,joueur2);
+        plateau.ajouterPierre(pierre8,joueur1);
+        
+        System.out.println(plateau.toString());
+        
+        
+        assertEquals(1,plateau.ajouterPierre(pierre9,joueur2));
+
+    }
+    
+    
+    
+    /**
+     * Test de la fonction ajouterPierre pour une situation de ko
+     */
+    @Test
+    public void testSucidePierre()
+    {
+        PlateauDeJeu plateau = new PlateauDeJeu(11);
+        Joueur joueur1 = new Joueur("Noir");
+        Joueur joueur2 = new Joueur("Blanc");
+        Pierre pierre1 = new Pierre("Noir", new Point2D.Float(2,1));
+        Pierre pierre2 = new Pierre("Noir", new Point2D.Float(3,1));
+        Pierre pierre3 = new Pierre("Noir", new Point2D.Float(1,2));
+        Pierre pierre4 = new Pierre("Noir", new Point2D.Float(2,3));
+        Pierre pierre5 = new Pierre("Noir", new Point2D.Float(3,3));
+        Pierre pierre6 = new Pierre("Noir", new Point2D.Float(4,2));
+        Pierre pierre7 = new Pierre("Blanc", new Point2D.Float(3,2));
+        Pierre pierre8 = new Pierre("Blanc", new Point2D.Float(2,2));
+        
+        plateau.ajouterPierre(pierre1,joueur1);
+        plateau.ajouterPierre(pierre2,joueur1);
+        plateau.ajouterPierre(pierre3,joueur1);
+        plateau.ajouterPierre(pierre4,joueur1);
+        plateau.ajouterPierre(pierre5,joueur1);
+        plateau.ajouterPierre(pierre6,joueur1);
+        plateau.ajouterPierre(pierre7,joueur2);
+  
+        assertEquals(3,plateau.ajouterPierre(pierre8,joueur2));
+
+    }
+    
     
 }

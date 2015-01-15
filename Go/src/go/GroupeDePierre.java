@@ -99,6 +99,9 @@ public class GroupeDePierre {
      */
     public void capturer(PlateauDeJeu plateau, Joueur joueur) {
         if (nbLibertes(plateau) == 0) {
+            if(pierres.size()==1){
+                plateau.setKo(pierres.get(0).getPosition());
+            }
             for (Pierre pierre : pierres) {
                 plateau.supprimerPierre(pierre);
                 joueur.addPionCapture(1);

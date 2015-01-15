@@ -110,15 +110,15 @@ public class PlateauDeJeu {
             // Vérifie si la position est libre
             if (estVide(pierre.getPosition()))
             {
+                plateau.add(pierre);
                 groupe = new GroupeDePierre(pierre, this);
+                groupe.captureSiBesoin(this,joueur);
                 if(groupe.nbLibertes(this)==0){
                     flag=3; // C'est un suicide
+                    plateau.remove(pierre);
                 }
                 else{
-                    plateau.add(pierre);
-
                     //On verifie les captures
-                    groupe.captureSiBesoin(this,joueur); 
                     flag=0;
                 }    
             } else
