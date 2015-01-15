@@ -159,7 +159,11 @@ public class PlateauDeJeu {
         return result==0;
     }
     
+    
     @Override
+    /**
+     * String pour afficher le plateau dans le terminal
+     */
     public String toString(){
         String resultPlateau="";
         

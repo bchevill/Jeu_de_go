@@ -42,10 +42,13 @@ public class GroupeDePierreTest {
         listPierres.add(pion);
         listPierres.add(pion2);
         listPierres.add(pion3);
-        PlateauDeJeu plateau = new PlateauDeJeu(10);
-        GroupeDePierre result = new GroupeDePierre(pion);
+        PlateauDeJeu plateau = new PlateauDeJeu(10);       
+        plateau.ajouterPierre(pion2);
+        plateau.ajouterPierre(pion3);
+        plateau.ajouterPierre(pion);
+        GroupeDePierre group = new GroupeDePierre(pion,plateau);
         ArrayList<Pierre> expresult = listPierres;
-        assertEquals(expresult, result);
+        assertEquals(expresult, group.getPierres());
     }
     
 }

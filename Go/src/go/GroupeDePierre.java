@@ -35,7 +35,7 @@ public class GroupeDePierre {
         while (!aTraiter.isEmpty()) {
             traitee = aTraiter.pop();
             pierres.add(traitee);
-            for (Pierre pierrevoisine : pierre.amiesVoisines(plateau)) {
+            for (Pierre pierrevoisine : traitee.amiesVoisines(plateau)) {
                 if (!pierres.contains(pierrevoisine)) {
                     aTraiter.push(pierrevoisine);
                 }
