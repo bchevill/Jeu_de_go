@@ -166,13 +166,13 @@ public class PlateauDeJeu {
         boolean isPierrePosition;
         String color="";
         
-        for(int i=0;i<taille;i++){
+        for(int i=taille-1;i>=0;i--){
             for(int j=0;j<taille;j++){
                 isPierrePosition=false;
                 for(Pierre pierre : plateau){
                     if(pierre.getPosition().getX()==j && pierre.getPosition().getY()==i){
                         isPierrePosition=true;
-                        if(pierre.getCouleur()=="Noir"){
+                        if(pierre.getCouleur().equals("Noir")){
                             color="Noir";
                         }
                         else{

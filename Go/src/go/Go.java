@@ -66,13 +66,13 @@ public class Go {
             {
 
                 //On demande à l'utilisateur de rentrer l'abcisse de la pierre qu'il veut poser ou s'il veut passer son tour
-                while (pierreX < -1 || pierreX > taille-1)
+                while (pierreX < -1 || pierreX > taille || pierreX==0)
                 {
                     Scanner scannerPosX = new Scanner(System.in);
-                    System.out.println("L'abscisse de la case où vous voulez poser votre pierre : (Entre 0 et " + Integer.toString(taille - 1) + " ou -1 pour passer son tour) :");
+                    System.out.println("L'abscisse de la case où vous voulez poser votre pierre : (Entre 1 et " + Integer.toString(taille) + " ou -1 pour passer son tour) :");
                     while(!scannerPosX.hasNextInt()){
                         System.out.println("Ce n'est pas un nombre !");
-                        System.out.println("L'abscisse de la case où vous voulez poser votre pierre : (Entre 0 et " + Integer.toString(taille - 1) + " ou -1 pour passer son tour) :");
+                        System.out.println("L'abscisse de la case où vous voulez poser votre pierre : (Entre 1 et " + Integer.toString(taille) + " ou -1 pour passer son tour) :");
                         scannerPosX.next();
                     }                    
                     pierreX = scannerPosX.nextInt();
@@ -99,13 +99,13 @@ public class Go {
                     //On demande à l'utilisateur de rentrer l'ordonnée de la pierre qu'il veut poser
                     int pierreY = -1;
 
-                    while (pierreY < 0 || pierreY > taille-1)
+                    while (pierreY < 0 || pierreY > taille)
                     {
                         Scanner scannerPosY = new Scanner(System.in);
-                        System.out.println("L'ordonnée de la case où vous voulez poser votre pierre : (Entre 0 et " + Integer.toString(taille - 1) + " ou -1 pour passer son tour) :");
+                        System.out.println("L'ordonnée de la case où vous voulez poser votre pierre : (Entre 1 et " + Integer.toString(taille) + " ou -1 pour passer son tour) :");
                         while(!scannerPosY.hasNextInt()){
                             System.out.println("Ce n'est pas un nombre !");
-                            System.out.println("L'ordonnée de la case où vous voulez poser votre pierre : (Entre 0 et " + Integer.toString(taille - 1) + " ou -1 pour passer son tour) :");
+                            System.out.println("L'ordonnée de la case où vous voulez poser votre pierre : (Entre 1 et " + Integer.toString(taille) + " ou -1 pour passer son tour) :");
                             scannerPosY.next();
                         }                    
                         pierreY = scannerPosY.nextInt();
@@ -113,7 +113,7 @@ public class Go {
                     System.out.println("Vous avez rentré l'ordonné : "+ pierreY);
 
                     //On ajoute la pierre au plateau
-                    Point2D position = new Point2D.Double(pierreX, pierreY);
+                    Point2D position = new Point2D.Double(pierreX-1, pierreY-1);
                     Pierre pierre = new Pierre(joueurActif.getCouleur(), position);
 
                     // On ajoute la pierre. Si ce n'est pas possible, on boucle
@@ -141,11 +141,8 @@ public class Go {
             joueurActif = joueurActif.getCouleur().equals("Blanc") ? joueur2 : joueur1;
             
             System.out.println("Fin du tour \n");
-            System.out.println(plateau.toString());
-            System.out.println("\n \n");
-            
-        }
-        
+            System.out.println(plateau.toString());            
+        } 
         System.out.println("Fin de la Partie");
 
     }
