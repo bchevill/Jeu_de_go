@@ -77,6 +77,8 @@ public class Go {
                     }                    
                     pierreX = scannerPosX.nextInt();
                 }
+                System.out.println("Vous avez rentré l'abscisse : "+ pierreX);
+
 
                 //Le joueur passe son tour ?
                 if (pierreX == -1)
@@ -108,6 +110,7 @@ public class Go {
                         }                    
                         pierreY = scannerPosY.nextInt();
                     }
+                    System.out.println("Vous avez rentré l'ordonné : "+ pierreY);
 
                     //On ajoute la pierre au plateau
                     Point2D position = new Point2D.Double(pierreX, pierreY);
