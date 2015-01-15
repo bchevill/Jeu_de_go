@@ -117,7 +117,7 @@ public class Go {
                     Pierre pierre = new Pierre(joueurActif.getCouleur(), position);
 
                     // On ajoute la pierre. Si ce n'est pas possible, on boucle
-                    okAjouterPierre = plateau.ajouterPierre(pierre);
+                    okAjouterPierre = plateau.ajouterPierre(pierre,joueurActif);
                     
                     switch (okAjouterPierre) {
                         case 0 :
@@ -141,7 +141,9 @@ public class Go {
             joueurActif = joueurActif.getCouleur().equals("Blanc") ? joueur2 : joueur1;
             
             System.out.println("Fin du tour \n");
-            System.out.println(plateau.toString());            
+            System.out.println(plateau.toString()); 
+            System.out.println("Nb pion capturé par Blanc : "+joueur1.getPionCapture()); 
+            System.out.println("Nb pion capturé par Noir  : "+joueur2.getPionCapture()+"\n");
         } 
         System.out.println("Fin de la Partie");
 

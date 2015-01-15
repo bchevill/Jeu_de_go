@@ -6,6 +6,7 @@ package go;
  */
 public class Joueur {
     private String couleur;
+    private int pionCapture;
     
     // Constructeur
     
@@ -14,6 +15,7 @@ public class Joueur {
      */
     public Joueur(String couleur){
         this.couleur=couleur;
+        this.pionCapture=0;
     }
     
     //Getters and Setters
@@ -24,6 +26,14 @@ public class Joueur {
      */
     public String getCouleur(){
         return couleur;
+    }
+    
+    public int getPionCapture(){
+        return pionCapture;
+    }
+    
+    public void addPionCapture(int nb){
+        this.pionCapture+=nb;
     }
     
 }

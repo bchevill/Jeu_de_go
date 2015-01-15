@@ -97,7 +97,7 @@ public class PlateauDeJeu {
      * @return 0 si aucun probleme, 1 si problème de ko, 2 si l'emplacement
      * est déjà pris et 3 s'il y a suicide.
      */
-    public int ajouterPierre(Pierre pierre)
+    public int ajouterPierre(Pierre pierre,Joueur joueur)
     {
         // TODO Appeler la "fonction groupe de pierres"
         GroupeDePierre groupe;
@@ -118,7 +118,7 @@ public class PlateauDeJeu {
                     plateau.add(pierre);
 
                     //On verifie les captures
-                    groupe.captureSiBesoin(this); 
+                    groupe.captureSiBesoin(this,joueur); 
                     flag=0;
                 }    
             } else

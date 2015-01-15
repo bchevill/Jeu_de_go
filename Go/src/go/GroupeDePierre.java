@@ -73,7 +73,7 @@ public class GroupeDePierre {
      * Cherche a savoir s'il y a eu capture de pions et les retirent du plateau dans le cas échéant
      * @param plateau Le plateau de Jeu
      */
-    public void captureSiBesoin(PlateauDeJeu plateau){
+    public void captureSiBesoin(PlateauDeJeu plateau, Joueur joueur){
         //On récupère les pierres du plateau
         ArrayList<Pierre> pierresDuPlateau;
         pierresDuPlateau = plateau.getPierres();
@@ -86,7 +86,7 @@ public class GroupeDePierre {
                     //On calcule le groupe de ces pierres ci
                     GroupeDePierre groupeATester = new GroupeDePierre(pierresDuPlateau.get(j),plateau);
                     //Si elles sont capturés on les retire du plateau
-                    groupeATester.capturer(plateau);
+                    groupeATester.capturer(plateau,joueur);
                 }
             }
         }
@@ -97,10 +97,11 @@ public class GroupeDePierre {
      *
      * @param plateau
      */
-    public void capturer(PlateauDeJeu plateau) {
+    public void capturer(PlateauDeJeu plateau, Joueur joueur) {
         if (nbLibertes(plateau) == 0) {
             for (Pierre pierre : pierres) {
                 plateau.supprimerPierre(pierre);
+                joueur.addPionCapture(1);
             }
         }
     }
