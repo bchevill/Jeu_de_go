@@ -35,6 +35,7 @@ public class GroupeDePierreTest {
     @Test
     public void GroupeDePierre() {
         System.out.println("GroupeDePierre");
+        Joueur joueur = new Joueur("Noir");
         Pierre pion= new Pierre ("noir", new Point2D.Double(2,2));
         Pierre pion2= new Pierre ("noir",new Point2D.Double(1,2));
         Pierre pion3= new Pierre ("noir",new Point2D.Double(1,3));
@@ -43,9 +44,9 @@ public class GroupeDePierreTest {
         listPierres.add(pion2);
         listPierres.add(pion3);
         PlateauDeJeu plateau = new PlateauDeJeu(10);       
-        plateau.ajouterPierre(pion2);
-        plateau.ajouterPierre(pion3);
-        plateau.ajouterPierre(pion);
+        plateau.ajouterPierre(pion2,joueur);
+        plateau.ajouterPierre(pion3,joueur);
+        plateau.ajouterPierre(pion,joueur);
         GroupeDePierre group = new GroupeDePierre(pion,plateau);
         ArrayList<Pierre> expresult = listPierres;
         assertEquals(expresult, group.getPierres());

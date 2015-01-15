@@ -59,11 +59,12 @@ public class PierreTest {
     public void testNbLibertesCoin()
     {
         PlateauDeJeu plateau = new PlateauDeJeu(19);
+        Joueur joueur = new Joueur("Noir");
         Pierre pierre1 = new Pierre("Rouge", new Point2D.Float(0,0));
         Pierre pierre2 = new Pierre("Jaune", new Point2D.Float(0,1));
         
-        plateau.ajouterPierre(pierre1);
-        plateau.ajouterPierre(pierre2);
+        plateau.ajouterPierre(pierre1,joueur);
+        plateau.ajouterPierre(pierre2,joueur);
         
         assertEquals(1,pierre1.nbLibertes(plateau));
     }
@@ -75,11 +76,12 @@ public class PierreTest {
     public void testNbLibertesBord()
     {
         PlateauDeJeu plateau = new PlateauDeJeu(19);
+        Joueur joueur = new Joueur("Noir");
         Pierre pierre1 = new Pierre("Rouge", new Point2D.Float(4,4));
         Pierre pierre2 = new Pierre("Jaune", new Point2D.Float(4,5));
         
-        plateau.ajouterPierre(pierre1);
-        plateau.ajouterPierre(pierre2);
+        plateau.ajouterPierre(pierre1,joueur);
+        plateau.ajouterPierre(pierre2,joueur);
         
         assertEquals(3,pierre1.nbLibertes(plateau));
     }
@@ -91,11 +93,12 @@ public class PierreTest {
     public void testNbLibertesGeneral()
     {
         PlateauDeJeu plateau = new PlateauDeJeu(19);
+        Joueur joueur = new Joueur("Noir");
         Pierre pierre1 = new Pierre("Rouge", new Point2D.Float(0,6));
         Pierre pierre2 = new Pierre("Jaune", new Point2D.Float(0,5));
         
-        plateau.ajouterPierre(pierre1);
-        plateau.ajouterPierre(pierre2);
+        plateau.ajouterPierre(pierre1,joueur);
+        plateau.ajouterPierre(pierre2,joueur);
         
         assertEquals(2,pierre1.nbLibertes(plateau));
     }
