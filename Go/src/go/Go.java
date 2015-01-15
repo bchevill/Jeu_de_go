@@ -30,6 +30,10 @@ public class Go {
         {
             Scanner scanner = new Scanner(System.in);
             System.out.println("Rentrer la taille du plateau de jeu : (9, 11 ou 19) :");
+            while(!scanner.hasNextInt()){
+                System.out.println("Ce n'est pas un nombre !");
+                scanner.next();
+            }
             taille = scanner.nextInt();
         }
 
@@ -66,6 +70,11 @@ public class Go {
                 {
                     Scanner scannerPosX = new Scanner(System.in);
                     System.out.println("L'abscisse de la case où vous voulez poser votre pierre : (Entre 0 et " + Integer.toString(taille - 1) + " ou -1 pour passer son tour) :");
+                    while(!scannerPosX.hasNextInt()){
+                        System.out.println("Ce n'est pas un nombre !");
+                        System.out.println("L'abscisse de la case où vous voulez poser votre pierre : (Entre 0 et " + Integer.toString(taille - 1) + " ou -1 pour passer son tour) :");
+                        scannerPosX.next();
+                    }                    
                     pierreX = scannerPosX.nextInt();
                 }
 
@@ -92,6 +101,11 @@ public class Go {
                     {
                         Scanner scannerPosY = new Scanner(System.in);
                         System.out.println("L'ordonnée de la case où vous voulez poser votre pierre : (Entre 0 et " + Integer.toString(taille - 1) + " ou -1 pour passer son tour) :");
+                        while(!scannerPosY.hasNextInt()){
+                            System.out.println("Ce n'est pas un nombre !");
+                            System.out.println("L'ordonnée de la case où vous voulez poser votre pierre : (Entre 0 et " + Integer.toString(taille - 1) + " ou -1 pour passer son tour) :");
+                            scannerPosY.next();
+                        }                    
                         pierreY = scannerPosY.nextInt();
                     }
 
