@@ -7,6 +7,7 @@ package go;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  *
@@ -15,7 +16,7 @@ import java.util.LinkedList;
 public class GroupeDePierre {
     /* Variables de classe*/
 
-    ArrayList<Pierre> pierres;
+    List<Pierre> pierres;
 
     /* Constructeurs */
     /**
@@ -27,7 +28,7 @@ public class GroupeDePierre {
         pierres = new ArrayList<Pierre>();
         pierres.add(pierre);
         Pierre traitee;
-        LinkedList<Pierre> aTraiter = new LinkedList<Pierre>();
+        LinkedList<Pierre> aTraiter = new LinkedList<Pierre>();  //NOSONAR
         for (Pierre pierrevoisine : pierre.amiesVoisines(plateau)) {
             aTraiter.push(pierrevoisine);
         }
@@ -49,7 +50,7 @@ public class GroupeDePierre {
      * Getter de pierre
      * @return retourne la liste des pierres dans le groupe
      */
-    public ArrayList<Pierre> getPierres(){
+    public List<Pierre> getPierres(){
         return pierres;
     }
     
@@ -75,7 +76,7 @@ public class GroupeDePierre {
      */
     public void captureSiBesoin(PlateauDeJeu plateau, Joueur joueur){
         //On récupère les pierres du plateau
-        ArrayList<Pierre> pierresDuPlateau;
+        List<Pierre> pierresDuPlateau;
         pierresDuPlateau = plateau.getPierres();
         
         //On teste sur toutes les pierres du groupe

@@ -13,29 +13,24 @@ import java.util.*;
  * @author NguyenQuoc
  */
 public class Go {
+    
+    /**
+     * Constructeur ajouté sur conseil de sonarqube. La classe Go n'étant pas censé être instanciée, on évite ainsi que 
+     * java ne lui crée un constructeur par défaut public. Puis on lui ajoute le //NOSONAR sinon il se plaint du fait
+     * que nous avons fait une méthode vide et qu'il faudrait donc la supprimer! Aie aie pas parfaitement au point encore!
+     */
+    private Go(){}; //NOSONAR
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args)
-    {
-
-        int taille = -1;
+    public static void main(String[] args) {
 
         // Réponse à la question "Voulez-vous passer votre tour"
         boolean reponsePasserTourJ1 = false, reponsePasserTourJ2 = false;
 
-        // On demande à l'utilisateur la taille du plateau
-        while (taille != 9 && taille != 11 && taille != 19)
-        {
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Rentrer la taille du plateau de jeu : (9, 11 ou 19) :");
-            while(!scanner.hasNextInt()){
-                System.out.println("Ce n'est pas un nombre !");
-                scanner.next();
-            }
-            taille = scanner.nextInt();
-        }
+        //On récupère la taille voulue
+        int taille = PlateauDeJeu.entrerTaille();
 
         // On creer les joueurs et le plateau
         PlateauDeJeu plateau = new PlateauDeJeu(taille);
@@ -43,109 +38,63 @@ public class Go {
         Joueur joueur1 = new Joueur("Blanc");
         Joueur joueur2 = new Joueur("Noir");
 
-        // Joueur fictif qui désigne le joueur qui est en train de jouer
-        Joueur joueurActif = new Joueur("Gris");
+        // Joueur fictif qui désigne le joueur qui est en train de jouer. Joueur1 est le 1er joueur à jouer
+        Joueur joueurActif = joueur1;
 
-        // Joueur1 est le 1er joueur à jouer
-        joueurActif = joueur1;
-
-        //On vérifie les conditions de fin : Plus d'espace pour jouer ou les 2 joueurs passe leurs tours respectifs
-        while (plateau.resteDegreeLiberte() == false && !(reponsePasserTourJ1 == true && reponsePasserTourJ2 == true))
-        {
+        //On vérifie les conditions de fin : Plus d'espace pour jouer ou les 2 joueurs passent leurs tours respectifs
+        while (!plateau.plusDegresLiberte() && !(reponsePasserTourJ1 && reponsePasserTourJ2 )) {
 
             //On indique quel joueur doit jouer
-            System.out.println("Début du tour de Joueur " + joueurActif.getCouleur());
+            System.out.println("Début du tour de Joueur " + joueurActif.getCouleur()); //NOSONAR
 
             //int qui permet de vérfier que la pose de pierre s'est bien passé
             int okAjouterPierre = -1;
 
-            //int qui permet de déterminé l'ordonnée de la nouvelle pierre OU d'indiquer que le joueur veut passer son tour (dans ce cas là =-1)
+            //int qui permet de déterminer l'ordonnée de la nouvelle pierre OU d'indiquer que le joueur veut passer son tour (dans ce cas là =-1)
             int pierreX = -2;
 
-            while (okAjouterPierre != 0 && pierreX != -1)
-            {
+            while (okAjouterPierre != 0 && pierreX != -1) {
 
                 //On demande à l'utilisateur de rentrer l'abcisse de la pierre qu'il veut poser ou s'il veut passer son tour
-                while (pierreX < -1 || pierreX > taille || pierreX==0)
-                {
-                    Scanner scannerPosX = new Scanner(System.in);
-                    System.out.println("L'abscisse de la case où vous voulez poser votre pierre : (Entre 1 et " + Integer.toString(taille) + " ou -1 pour passer son tour) :");
-                    while(!scannerPosX.hasNextInt()){
-                        System.out.println("Ce n'est pas un nombre !");
-                        System.out.println("L'abscisse de la case où vous voulez poser votre pierre : (Entre 1 et " + Integer.toString(taille) + " ou -1 pour passer son tour) :");
-                        scannerPosX.next();
-                    }                    
-                    pierreX = scannerPosX.nextInt();
-                }
-                System.out.println("Vous avez rentré l'abscisse : "+ pierreX);
-
+                pierreX = joueurActif.entrerX(pierreX, taille);
 
                 //Le joueur passe son tour ?
-                if (pierreX == -1)
-                {
+                if (pierreX == -1) {
                     //On retient que le joueur passe son tour
-                    if (joueurActif.getCouleur().equals("Blanc"))
-                    {
-                        System.out.println("Le Joueur Blanc passe son tour \n");
+                    if ("Blanc".equals(joueurActif.getCouleur())) {
+                        System.out.println("Le Joueur Blanc passe son tour \n"); //NOSONAR
                         reponsePasserTourJ1 = true;
-                    } else
-                    {
-                        System.out.println("Le Joueur Noir passe son tour \n");
+                    } else {
+                        System.out.println("Le Joueur Noir passe son tour \n"); //NOSONAR
                         reponsePasserTourJ2 = true;
                     }
-                } else
-                {
+                } else {
 
                     //On demande à l'utilisateur de rentrer l'ordonnée de la pierre qu'il veut poser
-                    int pierreY = -1;
-
-                    while (pierreY < 0 || pierreY > taille)
-                    {
-                        Scanner scannerPosY = new Scanner(System.in);
-                        System.out.println("L'ordonnée de la case où vous voulez poser votre pierre : (Entre 1 et " + Integer.toString(taille) + " ou -1 pour passer son tour) :");
-                        while(!scannerPosY.hasNextInt()){
-                            System.out.println("Ce n'est pas un nombre !");
-                            System.out.println("L'ordonnée de la case où vous voulez poser votre pierre : (Entre 1 et " + Integer.toString(taille) + " ou -1 pour passer son tour) :");
-                            scannerPosY.next();
-                        }                    
-                        pierreY = scannerPosY.nextInt();
-                    }
-                    System.out.println("Vous avez rentré l'ordonné : "+ pierreY);
+                    int pierreY=joueurActif.entrerY(taille);
 
                     //On ajoute la pierre au plateau
-                    Point2D position = new Point2D.Double(pierreX-1, pierreY-1);
+                    Point2D position = new Point2D.Double(pierreX - 1, pierreY - 1);
                     Pierre pierre = new Pierre(joueurActif.getCouleur(), position);
 
                     // On ajoute la pierre. Si ce n'est pas possible, on boucle
-                    okAjouterPierre = plateau.ajouterPierre(pierre,joueurActif);
+                    okAjouterPierre = plateau.ajouterPierre(pierre, joueurActif);
+                    plateau.afficherPose(okAjouterPierre);
+
                     
-                    switch (okAjouterPierre) {
-                        case 0 :
-                            System.out.println("La pierre est posée");
-                            break;
-                        case 1 :
-                            System.out.println("La pierre n'a pas pu etre posée : \n Il y a un problème de KO");
-                            break;
-                        case 2 :
-                            System.out.println("La pierre n'a pas pu etre posée : \n L'emplacement est déjà pris");
-                            break;
-                        case 3 :
-                            System.out.println("La pierre n'a pas pu etre posée : \n C'est un sucide");
-                            break;
-                    }
-                    
+
                 }
             }
 
             //On change de joueur
-            joueurActif = joueurActif.getCouleur().equals("Blanc") ? joueur2 : joueur1;
-            
-            System.out.println("Fin du tour \n");
-            System.out.println(plateau.toString()); 
-            System.out.println("Nb pion capturé par Blanc : "+joueur1.getPionCapture()); 
-            System.out.println("Nb pion capturé par Noir  : "+joueur2.getPionCapture()+"\n");
-        } 
-        System.out.println("Fin de la Partie");
+            joueurActif = "Blanc".equals(joueurActif.getCouleur()) ? joueur2 : joueur1;
+
+            System.out.println("Fin du tour \n"); //NOSONAR
+            System.out.println(plateau.toString()); //NOSONAR
+            System.out.println("Nb pion capturé par Blanc : " + joueur1.getPionCapture()); //NOSONAR
+            System.out.println("Nb pion capturé par Noir  : " + joueur2.getPionCapture() + "\n"); //NOSONAR
+        }
+        System.out.println("Fin de la Partie"); //NOSONAR
 
     }
 

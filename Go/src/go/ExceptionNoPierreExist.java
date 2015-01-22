@@ -11,8 +11,7 @@ package go;
  */
 class ExceptionNoPierreExist extends Exception {
 
-    public ExceptionNoPierreExist()
-    {
+    public ExceptionNoPierreExist() {
     }
-    
+
 }
