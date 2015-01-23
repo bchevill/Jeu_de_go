@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- You may freely edit this file. See commented blocks below for -->
+<!-- some examples of how to customize the build. -->
+<!-- (If you delete it and reopen the project it will be recreated.) -->
+<!-- By default, only the Clean and Build commands use this build script. -->
+<!-- Commands such as Run, Debug, and Test only use this build script if -->
+<!-- the Compile on Save feature is turned off for the project. -->
+<!-- You can turn off the Compile on Save (or Deploy on Save) setting -->
+<!-- in the project's Project Properties dialog box.-->
+<project name="Go" default="compile" basedir="..">
+    <description>Notre fichier Build pour compiler avec Ant</description>
+
+    <target name="checkDependences" description="Vérifie les dépendances">
+		<echo message="Recherche des dépendances"/> 
+		<property name="src.location" location="src"/>
+		<property name="release.location" location="release"/>
+		<property name="working.location" location="working"/>
+		<property name="lib.location" location="lib"/>
+		<property name="test.location" location="test"/>
+
+		<condition property="src.available">
+			<and>
+				<available file="${src.location}" type="dir"/>
+				<available file="${release.location}" type="dir"/>
+				<available file="${working.location}" type="dir"/>
+				<available file="${lib.location}" type="dir"/>
+				<available file="${test.location}" type="dir"/>
+			</and>
+		</condition>
+
+		<condition property="junit.available">
+			<available file="${lib.location}/junit-4.4.jar"/>
+		</condition>
+		<echo message="Ok !"/> 
+
+	</target>
+
+	<target name="getJUnit" description="Récupère le jar de jUnit" unless="junit.available">
+		<echo message="Récupération du jar de jUnit"/>
+		<get src="http://central.maven.org/maven2/junit/junit/4.4/junit-4.4.jar" dest="${lib.location}"/>
+		<echo message="Ok!"/>
+	</target>
+
+	<target name="loadJUnit" description="Ajoute le junit path pour les tests" depends="checkDependences" if="src.available">
+		<antcall target="getJUnit"/>
+		<path id="junit.path">
+			<fileset dir="${lib.location}">
+				<include name="junit-4.4.jar"/>
+			</fileset>
+		</path>
+	</target>
+
+	<target name="compileTests" description="Compile les fichiers tests" depends="loadJUnit,compile">
+		
+		<javac srcdir="${test.location}" destdir="${working.location}/test" includeantruntime="true">
+			<classpath>
+				<path refid="junit.path"/>
+				<path location="${working.location}"/>
+			</classpath>
+		</javac>
+	</target>
+
+	<target name="runTests" description="Execute les tests" depends="compileTests">
+		<junit >
+			<classpath>
+				<path refid="junit.path"/>
+				<path location="${working.location}"/>
+			</classpath>
+			<batchtest>
+				<fileset dir="${working.location}/test">
+					<include name="*"/>
+				</fileset>
+			</batchtest>
+		</junit>
+
+	</target>
+ 
+    
+    <target name="compile" description= "Compile le projet" depends="checkDependences" if="src.available">
+    	
+    	<echo message="Compilation en .class"/> 
+    	<javac srcdir="${src.location}" destdir="${working.location}" includeantruntime="true"/>
+    	<echo message="Création du .jar"/>
+    	<jar destfile="${release.location}/go.jar" basedir="${working.location}"/>
+	    	<manifest file="manifest">
+	    		<attribute name="Main-Class" value="go.Go"/>
+	        </manifest>
+    	<echo message="Ok !"/> 
+    </target>
+
+    <target name="run" depends="checkDependences" if="src.available">
+        <java jar="${release.location}/go.jar" fork="true"/>
+    </target>
+
+
+</project>
