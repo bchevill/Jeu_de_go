@@ -1,5 +1,6 @@
 package go;
 
+import java.awt.geom.Point2D;
 import java.util.Scanner;
 
 /**
@@ -73,5 +74,44 @@ public class Joueur {
         }
         System.out.println("Vous avez rentré l'ordonné : " + pierreY); //NOSONAR
         return pierreY;
+    }
+    
+    public void jouer(PlateauDeJeu plateau, boolean[] passerTour, int taille){
+        //int qui permet de vérfier que la pose de pierre s'est bien passé
+        int okAjouterPierre = -1;
+
+        //int qui permet de déterminer l'ordonnée de la nouvelle pierre OU d'indiquer que le joueur veut passer son tour (dans ce cas là =-1)
+        // Sonar se plaint de la présence d'un "magic number", mais nous n'allons pas créer une constante d'initialisation de la variable...
+        int pierreX = -2;  //NOSONAR   
+
+        while (okAjouterPierre != 0 && pierreX != -1) {
+
+            //On demande à l'utilisateur de rentrer l'abcisse de la pierre qu'il veut poser ou s'il veut passer son tour
+            pierreX = this.entrerX(pierreX, taille);
+
+            //Le joueur passe son tour ?
+            if (pierreX == -1) {
+                //On retient que le joueur passe son tour
+                if (Go.BLANC.equals(this.getCouleur())) {
+                    System.out.println("Le Joueur Blanc passe son tour \n"); //NOSONAR
+                    passerTour[0] = true;
+                } else {
+                    System.out.println("Le Joueur Noir passe son tour \n"); //NOSONAR
+                    passerTour[1] = true;
+                }
+            } else {
+
+                //On demande à l'utilisateur de rentrer l'ordonnée de la pierre qu'il veut poser
+                int pierreY=this.entrerY(taille);
+
+                //On ajoute la pierre au plateau
+                Point2D position = new Point2D.Double(pierreX - 1, pierreY - 1);
+                Pierre pierre = new Pierre(this.getCouleur(), position);
+
+                // On ajoute la pierre. Si ce n'est pas possible, on boucle
+                okAjouterPierre = plateau.ajouterPierre(pierre, this);
+                plateau.afficherPose(okAjouterPierre);
+            }
+        }
     }
 }

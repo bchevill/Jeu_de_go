@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -15,6 +17,21 @@ import java.util.Scanner;
  * @author NguyenQuoc
  */
 public class PlateauDeJeu {
+    
+    //Déclaration des constantes car SonarQube n'aime pas les "magic number"
+    public static final int PETIT_PLATEAU = 9;
+    public static final int PLATEAU_MOYEN = 11;
+    public static final int GRAND_PLATEAU = 19;
+    
+    public static final int FLAG_OK = 0;
+    public static final int FLAG_SUICIDE = 3;
+    public static final int FLAG_KO = 1;
+    public static final int FLAG_OCCUPE = 2;
+
+    
+    
+    
+
 
     /* Variables de classes */
     List<Pierre> plateau;
@@ -57,7 +74,7 @@ public class PlateauDeJeu {
         // On demande à l'utilisateur la taille du plateau
         int taille = -1;
         
-        while (taille != 9 && taille != 11 && taille != 19) {
+        while (taille != PETIT_PLATEAU && taille != PLATEAU_MOYEN && taille != GRAND_PLATEAU) {
             Scanner scanner = new Scanner(System.in);
             System.out.println("Rentrer la taille du plateau de jeu : (9, 11 ou 19) :");  //NOSONAR
             while (!scanner.hasNextInt()) {
@@ -108,10 +125,11 @@ public class PlateauDeJeu {
      * déjà pris et 3 s'il y a suicide.
      */
     public int ajouterPierre(Pierre pierre, Joueur joueur) {
-        // TODO Appeler la "fonction groupe de pierres"
+        
         GroupeDePierre groupe;
-
-        int flag; // Message à renvoyer
+        
+        // Message à renvoyer
+        int flag; 
 
         //Vérifie si la pierre ne remplit pas les conditions de ko
         if (!ko(pierre.getPosition())) {
@@ -121,17 +139,20 @@ public class PlateauDeJeu {
                 groupe = new GroupeDePierre(pierre, this);
                 groupe.captureSiBesoin(this, joueur);
                 if (groupe.nbLibertes(this) == 0) {
-                    flag = 3; // C'est un suicide
+                    // C'est un suicide
+                    flag = FLAG_SUICIDE; 
                     plateau.remove(pierre);
                 } else {
                     //On verifie les captures
-                    flag = 0;
+                    flag = FLAG_OK;
                 }
             } else {
-                flag = 2; // L'emplacement est déjà pris
+                // L'emplacement est déjà pris
+                flag = FLAG_OCCUPE; 
             }
         } else {
-            flag = 1; // C'est un KO
+            // C'est un KO
+            flag = FLAG_KO; 
         }
         return flag;
     }
@@ -142,16 +163,16 @@ public class PlateauDeJeu {
      */
     public void afficherPose(int okAjouterPierre){
         switch (okAjouterPierre) {
-            case 0:
+            case FLAG_OK:
                 System.out.println("La pierre est posée"); //NOSONAR
                 break;
-            case 1:
+            case FLAG_KO:
                 System.out.println("La pierre n'a pas pu etre posée : \n Il y a un problème de KO"); //NOSONAR
                 break;
-            case 2:
+            case FLAG_OCCUPE:
                 System.out.println("La pierre n'a pas pu etre posée : \n L'emplacement est déjà pris"); //NOSONAR
                 break;
-            case 3:
+            case FLAG_SUICIDE:
                 System.out.println("La pierre n'a pas pu etre posée : \n C'est un sucide"); //NOSONAR
                 break;
             default:
@@ -194,38 +215,47 @@ public class PlateauDeJeu {
      * String pour afficher le plateau dans le terminal
      */
     public String toString() {
-        String resultPlateau = "";
-
-        boolean isPierrePosition;
-        String color = "";
+        
+        
+        String resultPlateau="";
 
         for (int i = taille - 1; i >= 0; i--) {
             for (int j = 0; j < taille; j++) {
-                isPierrePosition = false;
-                for (Pierre pierre : plateau) {
-                    if (pierre.getPosition().getX() == j && pierre.getPosition().getY() == i) {
-                        isPierrePosition = true;
-                        if ("Noir".equals(pierre.getCouleur())) {
-                            color = "Noir";
-                        } else {
-                            color = "Blanc";
-                        }
-                    }
-                }
-                if (isPierrePosition) {
-                    if (color == "Blanc") {
-                        resultPlateau += "O ";
-                    } else {
-                        resultPlateau += "0 ";
-                    }
-                } else {
-                    resultPlateau += "- ";
-                }
+               resultPlateau += caseToString(i,j);
+                
             }
             resultPlateau += " \n";
         }
         return resultPlateau;
 
+    }
+    
+    public String caseToString(int i, int j){
+        
+        String resultPlateau = "";
+        String color = "";
+        boolean isPierrePosition = false;
+        for (Pierre pierre : plateau) {
+            if (pierre.getPosition().getX() == j && pierre.getPosition().getY() == i) {
+                isPierrePosition = true;
+                if ("Noir".equals(pierre.getCouleur())) {
+                    color = "Noir";
+                } else {
+                    color = "Blanc";
+                }
+            }
+        }
+        if (isPierrePosition) {
+            if ("Blanc".equals(color)) {
+                resultPlateau += "O ";
+            } else {
+                resultPlateau += "0 ";
+            }
+        } else {
+            resultPlateau += "- ";
+        }
+        return resultPlateau;
+        
     }
 
 }
